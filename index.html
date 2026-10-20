@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ckb" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#126b45">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="SM GATE">
+<link rel="manifest" href="./manifest.json">
+<link rel="apple-touch-icon" href="./icons/icon-192.png">
+<title>SM GATE EXCHANGE</title>
+<style>
+:root{--green:#126b45;--green2:#198754;--bg:#f3f6f4;--card:#fff;--ink:#17231d;--muted:#63736a;--line:#dce5df;--red:#b42318}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Tahoma,Arial,sans-serif}
+header{background:linear-gradient(135deg,var(--green),#0b5134);color:white;padding:22px 18px 18px;border-radius:0 0 22px 22px}
+.brand{font-size:21px;font-weight:800;letter-spacing:.3px}.sub{font-size:13px;opacity:.88;margin-top:5px}
+main{max-width:760px;margin:auto;padding:14px 12px 90px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 0 14px}
+.tab{border:1px solid var(--line);background:white;border-radius:12px;padding:10px 4px;font-size:12px;color:var(--ink);font-weight:700}
+.tab.active{background:var(--green);color:white;border-color:var(--green)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:15px;margin-bottom:13px;box-shadow:0 3px 12px #183b2910}
+h2{font-size:17px;margin:0 0 13px} h3{font-size:14px;margin:0 0 8px}
+label{display:block;font-size:13px;font-weight:700;margin:0 0 6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #ccd8d0;border-radius:10px;background:#fff;font:inherit;font-size:16px;color:var(--ink);margin-bottom:12px;min-height:44px}
+textarea{min-height:70px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button{font:inherit;cursor:pointer}
+.primary{background:var(--green);color:white;border:0;border-radius:11px;padding:13px 16px;font-weight:800;width:100%;min-height:46px}
+.secondary{background:#edf5ef;color:var(--green);border:1px solid #c9dfd0;border-radius:10px;padding:10px 12px;font-weight:700}
+.danger{background:#fff0ef;color:var(--red);border:1px solid #f2c9c5;border-radius:9px;padding:7px 10px}
+.result{background:#eef7f0;border:1px solid #cce5d2;border-radius:12px;padding:12px;margin:0 0 12px}
+.result small{display:block;color:var(--muted);font-size:12px}.result strong{font-size:22px;display:block;margin-top:4px;direction:ltr;text-align:right}
+.muted{color:var(--muted);font-size:12px;line-height:1.6}.hidden{display:none!important}
+.item{border-top:1px solid var(--line);padding:12px 0;display:grid;grid-template-columns:1fr auto;gap:8px}
+.item:first-of-type{border-top:0}.item-title{font-weight:800;font-size:14px}.item-meta{color:var(--muted);font-size:12px;margin-top:4px;line-height:1.6}
+.amount{font-weight:800;direction:ltr;text-align:left;white-space:nowrap}.empty{padding:18px 4px;color:var(--muted);text-align:center;font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.stat{background:#f6faf7;border:1px solid var(--line);border-radius:12px;padding:12px}.stat span{display:block;color:var(--muted);font-size:12px}.stat strong{display:block;font-size:20px;margin-top:6px;direction:ltr;text-align:right}
+footer{text-align:center;color:var(--muted);font-size:11px;padding:12px 0 0}
+@media(min-width:600px){main{padding-top:20px}.tab{font-size:14px}.panel{padding:18px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">SM GATE EXCHANGE</div>
+  <div class="sub">سیستەمی بەڕێوەبردنی گۆڕینەوەی دراو</div>
+</header>
+<main>
+  <nav class="tabs" aria-label="بەشەکان">
+    <button class="tab active" data-tab="exchange">گۆڕینەوە</button>
+    <button class="tab" data-tab="transactions">مامەڵەکان</button>
+    <button class="tab" data-tab="expenses">خەرجی</button>
+    <button class="tab" data-tab="reports">ڕاپۆرت</button>
+  </nav>
+
+  <section id="exchange" class="view">
+    <div class="panel">
+      <h2>مامەڵەی نوێی گۆڕینەوە</h2>
+      <form id="exchangeForm">
+        <div class="grid2">
+          <div><label for="fromCurrency">دراوی وەرگیراو</label><select id="fromCurrency"><option value="USD">دۆلار (USD)</option><option value="IQD">دیناری عێراقی (IQD)</option><option value="EUR">یۆرۆ (EUR)</option><option value="GBP">پاوند (GBP)</option><option value="TRY">لیرەی تورکی (TRY)</option></select></div>
+          <div><label for="toCurrency">دراوی دراو</label><select id="toCurrency"><option value="IQD">دیناری عێراقی (IQD)</option><option value="USD">دۆلار (USD)</option><option value="EUR">یۆرۆ (EUR)</option><option value="GBP">پاوند (GBP)</option><option value="TRY">لیرەی تورکی (TRY)</option></select></div>
+        </div>
+        <div class="grid2">
+          <div><label for="fromAmount">بڕی دراوی وەرگیراو</label><input id="fromAmount" type="number" min="0" step="any" inputmode="decimal" placeholder="0.00" required></div>
+          <div><label for="rate">نرخی گۆڕینەوە</label><input id="rate" type="number" min="0" step="any" inputmode="decimal" placeholder="نرخ" required></div>
+        </div>
+        <div class="result"><small>بڕی ئەنجام</small><strong id="resultAmount">0.00 IQD</strong><small id="calcHint">بڕ × نرخ</small></div>
+        <label for="customer">ناوی کڕیار (ئارەزوومەندانە)</label><input id="customer" type="text" placeholder="ناوی کڕیار">
+        <label for="note">تێبینی (ئارەزوومەندانە)</label><textarea id="note" placeholder="تێبینیی مامەڵە"></textarea>
+        <button class="primary" type="submit">تۆمارکردنی مامەڵە</button>
+      </form>
+      <p class="muted">ئاگاداری: ئەم وەشانە نرخ و بڕ بە شێوەی سادە هەژمار دەکات؛ کۆمیسیۆن و قازانج هێشتا زیاد نەکراون.</p>
+    </div>
+  </section>
+
+  <section id="transactions" class="view hidden">
+    <div class="panel">
+      <h2>مێژووی مامەڵەکان</h2>
+      <div class="grid2"><div><label for="txSearch">گەڕان بە ناو/دراو</label><input id="txSearch" placeholder="گەڕان..."></div><div><label for="txDate">بەروار</label><input id="txDate" type="date"></div></div>
+      <div id="transactionList"></div>
+    </div>
+  </section>
+
+  <section id="expenses" class="view hidden">
+    <div class="panel">
+      <h2>تۆمارکردنی خەرجی</h2>
+      <form id="expenseForm">
+        <label for="expenseTitle">ناوی خەرجی</label><input id="expenseTitle" required placeholder="بۆ نموونە: کرێی شوێن">
+        <div class="grid2"><div><label for="expenseAmount">بڕ</label><input id="expenseAmount" type="number" min="0" step="any" inputmode="decimal" required placeholder="0.00"></div><div><label for="expenseCurrency">دراو</label><select id="expenseCurrency"><option value="IQD">دیناری عێراقی (IQD)</option><option value="USD">دۆلار (USD)</option><option value="EUR">یۆرۆ (EUR)</option><option value="GBP">پاوند (GBP)</option><option value="TRY">لیرەی تورکی (TRY)</option></select></div></div>
+        <label for="expenseNote">تێبینی (ئارەزوومەندانە)</label><textarea id="expenseNote" placeholder="تێبینی"></textarea>
+        <button class="primary" type="submit">تۆمارکردنی خەرجی</button>
+      </form>
+    </div>
+    <div class="panel"><h2>خەرجییەکان</h2><div id="expenseList"></div></div>
+  </section>
+
+  <section id="reports" class="view hidden">
+    <div class="panel">
+      <h2>پوختەی ڕۆژانە</h2>
+      <label for="reportDate">بەروار</label><input id="reportDate" type="date">
+      <div class="stats">
+        <div class="stat"><span>ژمارەی مامەڵەکان</span><strong id="statCount">0</strong></div>
+        <div class="stat"><span>کۆی خەرجی (بە جیاوازی دراو)</span><strong id="statExpenseCount">0</strong></div>
+      </div>
+      <p class="muted">کۆی دراوە جیاوازەکان بەیەکەوە تێکەڵ ناکرێن، چونکە نرخی هاوبەش دیاری نەکراوە.</p>
+    </div>
+    <div class="panel">
+      <h2>پاراستن و گەڕاندنەوەی داتا</h2>
+      <p class="muted">هەموو تۆمارەکان لە ناو وێبگەڕی ئەم ئامێرەدا دەمێننەوە. فایلێکی backup بە خۆت هەڵبگرە؛ سڕینەوەی داتای Safari دەتوانێت تۆمارەکان بسڕێتەوە.</p>
+      <div class="grid2"><button id="exportBtn" class="secondary" type="button">هەناردەکردنی Backup</button><button id="importBtn" class="secondary" type="button">هێنانەوەی Backup</button></div>
+      <input id="importFile" type="file" accept="application/json,.json" class="hidden">
+      <button id="clearBtn" class="danger" type="button" style="width:100%;margin-top:8px">سڕینەوەی هەموو داتا</button>
+      <p class="muted">پێش سڕینەوە، backup وەربگرە. سڕینەوە ناگەڕێتەوە.</p>
+    </div>
+  </section>
+  <footer>SM GATE EXCHANGE · وەشانی سەرەتایی · تەنها بۆ تاقیکردنەوە</footer>
+</main>
+<script>
+const KEY='sm_gate_exchange_v1';
+const $=id=>document.getElementById(id);
+const today=()=>new Date().toLocaleDateString('en-CA');
+const fmt=(n)=>Number(n||0).toLocaleString('en-US',{maximumFractionDigits:4});
+let db={transactions:[],expenses:[]};
+try{const saved=localStorage.getItem(KEY);if(saved){const parsed=JSON.parse(saved);db={transactions:Array.isArray(parsed.transactions)?parsed.transactions:[],expenses:Array.isArray(parsed.expenses)?parsed.expenses:[]}}}catch(e){}
+function save(){localStorage.setItem(KEY,JSON.stringify(db));renderAll()}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function currencyLabel(c){return ({USD:'دۆلار',IQD:'دینار',EUR:'یۆرۆ',GBP:'پاوند',TRY:'لیرە'})[c]||c}
+function showDate(iso){try{return new Date(iso).toLocaleString('en-GB',{dateStyle:'short',timeStyle:'short'})}catch(e){return iso||''}}
+function updateCalc(){const a=Number($('fromAmount').value)||0,r=Number($('rate').value)||0,to=$('toCurrency').value;$('resultAmount').textContent=fmt(a*r)+' '+to;$('calcHint').textContent=fmt(a)+' '+$('fromCurrency').value+' × '+fmt(r)}
+['fromAmount','rate','fromCurrency','toCurrency'].forEach(id=>$(id).addEventListener('input',updateCalc));
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b===btn));document.querySelectorAll('.view').forEach(v=>v.classList.toggle('hidden',v.id!==btn.dataset.tab));renderAll()}));
+$('exchangeForm').addEventListener('submit',e=>{e.preventDefault();const from=Number($('fromAmount').value),rate=Number($('rate').value);if(!(from>0)||!(rate>0)){alert('تکایە بڕ و نرخێکی دروست بنووسە.');return}if($('fromCurrency').value===$('toCurrency').value){if(!confirm('دراوی وەرگیراو و دراوی دراو یەکسانن. بەردەوام بیت؟'))return}db.transactions.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),date:new Date().toISOString(),day:today(),fromCurrency:$('fromCurrency').value,toCurrency:$('toCurrency').value,fromAmount:from,rate,toAmount:from*rate,customer:$('customer').value.trim(),note:$('note').value.trim()});save();$('exchangeForm').reset();updateCalc();alert('مامەڵەکە تۆمار کرا.');document.querySelector('[data-tab="transactions"]').click()});
+$('expenseForm').addEventListener('submit',e=>{e.preventDefault();const amount=Number($('expenseAmount').value);if(!(amount>0)){alert('تکایە بڕێکی دروست بنووسە.');return}db.expenses.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),date:new Date().toISOString(),day:today(),title:$('expenseTitle').value.trim(),amount,currency:$('expenseCurrency').value,note:$('expenseNote').value.trim()});save();$('expenseForm').reset();alert('خەرجییەکە تۆمار کرا.')});
+function renderTransactions(){const q=$('txSearch').value.trim().toLowerCase(),day=$('txDate').value;const list=db.transactions.filter(t=>(!day||t.day===day)&&(!q||[t.customer,t.note,t.fromCurrency,t.toCurrency].join(' ').toLowerCase().includes(q)));$('transactionList').innerHTML=list.length?list.map(t=>`<div class="item"><div><div class="item-title">${esc(t.customer||'بێ ناوی کڕیار')} · ${esc(t.fromCurrency)} → ${esc(t.toCurrency)}</div><div class="item-meta">${esc(showDate(t.date))}<br>${esc(fmt(t.fromAmount))} × ${esc(fmt(t.rate))} = ${esc(fmt(t.toAmount))} ${esc(t.toCurrency)}${t.note?'<br>'+esc(t.note):''}</div></div><div><button class="danger" data-del-tx="${esc(t.id)}">سڕینەوە</button></div></div>`).join(''):'<div class="empty">هێشتا مامەڵەیەک تۆمار نەکراوە.</div>'}
+function renderExpenses(){const list=db.expenses;$('expenseList').innerHTML=list.length?list.map(x=>`<div class="item"><div><div class="item-title">${esc(x.title)} · ${esc(x.currency)}</div><div class="item-meta">${esc(showDate(x.date))}${x.note?'<br>'+esc(x.note):''}</div></div><div class="amount">${esc(fmt(x.amount))}<br><button class="danger" data-del-exp="${esc(x.id)}">سڕینەوە</button></div></div>`).join(''):'<div class="empty">هێشتا خەرجییەک تۆمار نەکراوە.</div>'}
+function renderReport(){const day=$('reportDate').value||today();$('statCount').textContent=db.transactions.filter(x=>x.day===day).length;$('statExpenseCount').textContent=db.expenses.filter(x=>x.day===day).length}
+function renderAll(){renderTransactions();renderExpenses();renderReport()}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-del-tx]');const x=e.target.closest('[data-del-exp]');if(t&&confirm('ئەم مامەڵەیە بسڕدرێتەوە؟')){db.transactions=db.transactions.filter(a=>a.id!==t.dataset.delTx);save()}if(x&&confirm('ئەم خەرجییە بسڕدرێتەوە؟')){db.expenses=db.expenses.filter(a=>a.id!==x.dataset.delExp);save()}});
+$('txSearch').addEventListener('input',renderTransactions);$('txDate').addEventListener('change',renderTransactions);$('reportDate').value=today();$('reportDate').addEventListener('change',renderReport);
+$('exportBtn').addEventListener('click',()=>{const blob=new Blob([JSON.stringify({app:'SM GATE EXCHANGE',version:1,exportedAt:new Date().toISOString(),...db},null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='SM-GATE-EXCHANGE-backup-'+today()+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+$('importBtn').addEventListener('click',()=>$('importFile').click());
+$('importFile').addEventListener('change',async e=>{const file=e.target.files[0];if(!file)return;try{const obj=JSON.parse(await file.text());if(!Array.isArray(obj.transactions)||!Array.isArray(obj.expenses))throw new Error('format');if(!confirm('داتای ئێستا جێگۆڕکێ دەکرێت بە داتای backup. بەردەوام بیت؟'))return;db={transactions:obj.transactions,expenses:obj.expenses};save();alert('Backup گەڕێندرایەوە.')}catch(err){alert('فایلی backup دروست نییە.')}finally{e.target.value=''}});
+$('clearBtn').addEventListener('click',()=>{if(confirm('دڵنیایت؟ هەموو مامەڵە و خەرجییەکان بە تەواوی دەسڕدرێنەوە.')){db={transactions:[],expenses:[]};save();alert('هەموو داتا سڕایەوە.')}});
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){window.addEventListener('load',()=>navigator.serviceWorker.register('./service-worker.js').catch(()=>{}))}
+renderAll();updateCalc();
+</script>
+</body>
+</html>
